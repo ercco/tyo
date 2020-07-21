@@ -1,4 +1,5 @@
 import datetime
+import sys
 
 def get_formatted_time(datetime_object):
     return datetime_object.strftime('%Y-%m-%dT%H:%M:%S')
@@ -21,3 +22,9 @@ def start():
 def stop():
     stop_time = datetime.datetime.now()
     write_to_file(stop_time,'stop')
+
+if __name__ == '__main__':
+    if sys.argv[1] == 'start':
+        start()
+    elif sys.argv[1] == 'stop':
+        stop()
