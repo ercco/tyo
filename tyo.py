@@ -23,6 +23,34 @@ def stop(tag='',additional_info=''):
     stop_time = datetime.datetime.now()
     write_to_file(stop_time,'stop',tag,additional_info)
 
+def summarize(time_period):
+    if len(time_period) == 4 or len(time_period) == 15:
+        summarize_period(time_period)
+    elif len(time_period) == 7:
+        summarize_month(time_period)
+    else:
+        print('Summarize argument invalid')
+
+def summarize_period(time_period):
+    if len(time_period) == 4:
+        start_year = int(time_period)
+        start_month = 1
+        end_year = int(time_period)
+        end_month = 12
+    elif len(time_period) == 15:
+        start_year = int(time_period[0:4])
+        start_month = int(time_period[5:7])
+        end_year = int(time_period[8:12])
+        end_month = int(time_period[13:15])
+    if start_year == end_year:
+        months = [m for m in range(start_month,end_month+1)]
+    else:
+        months = [m for m in range(start_month,13)] + list(range(1,13))*(end_year-start_year-1) + [m for m in range(1,end_month+1)]
+    return months
+
+def summarize_month(year_month):
+    pass
+
 if __name__ == '__main__':
     data = [sys.argv[1]]
     if len(sys.argv) == 2:
